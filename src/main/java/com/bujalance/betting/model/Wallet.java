@@ -2,22 +2,30 @@ package com.bujalance.betting.model;
 
 public class Wallet {
 
-	private double fFund;
+	private double fFunds;
 
 	public Wallet() {
 		this(0);
 	}
 
 	public Wallet(final double pInitialFund) {
-		fFund = pInitialFund;
+		fFunds = pInitialFund;
 	}
 
-	public double get(final double pQuantity) {
-		fFund -= pQuantity;
-		return pQuantity;
+	public void remove(final double pQuantity) {
+		fFunds -= pQuantity;
 	}
 
 	public void add(final double pQuantity) {
-		fFund += pQuantity;
+		fFunds += pQuantity;
+	}
+
+	public double get(final double pQuantity) {
+		remove(pQuantity);
+		return pQuantity;
+	}
+
+	public double getFunds() {
+		return fFunds;
 	}
 }
