@@ -7,26 +7,29 @@ import com.bujalance.betting.parser.BettingEventProvider;
 
 import java.util.Iterator;
 
-public abstract class AbstractStrategy implements IStrategy {
+public class Gambler {
 
+	private final IStrategy fStrategy;
+	private final Wallet fWallet;
 	/** The quantity to bet on each event. */
 	private final double fQuantityToBet;
 
-	public AbstractStrategy(final double pQuantityToBet) {
+	public Gambler(final IStrategy pStrategy, final double pQuantityToBet) {
+		fStrategy = pStrategy;
+		fWallet = new Wallet();
 		fQuantityToBet = pQuantityToBet;
 	}
 
-	@Override
-	public double betOnEvents(final Wallet pWallet, final BettingEventProvider pProvider) {
+	public double betOnEvents(final BettingEventProvider pProvider) {
 		Iterator<BettingEvent> events = pProvider.iterator();
 		while (events.hasNext()) {
-			betOnEvent(events.next(), pWallet);
+			betOnEvent(events.next(), fWallet);
 		}
-		return pWallet.getFunds();
+		return fWallet.getFunds();
 	}
 
 	private void betOnEvent(final BettingEvent pEvent, final Wallet pWallet) {
-		Odd chosenOdd = getChosenOdd(pEvent);
+		Odd chosenOdd = fStrategy.getChosenOdd(pEvent);
 		if (pEvent.getResult().equals(chosenOdd.getResult())) {
 			// Winning bet
 			pWallet.add(chosenOdd.getQuote() * pWallet.get(fQuantityToBet));
@@ -35,7 +38,5 @@ public abstract class AbstractStrategy implements IStrategy {
 			pWallet.remove(fQuantityToBet);
 		}
 	}
-
-	abstract Odd getChosenOdd(final BettingEvent pEvent);
 
 }

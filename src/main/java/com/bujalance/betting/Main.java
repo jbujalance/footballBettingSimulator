@@ -3,6 +3,7 @@ package com.bujalance.betting;
 import com.bujalance.betting.model.Bookmaker;
 import com.bujalance.betting.model.Wallet;
 import com.bujalance.betting.parser.BettingEventProvider;
+import com.bujalance.betting.strategy.Gambler;
 import com.bujalance.betting.strategy.IStrategy;
 import com.bujalance.betting.strategy.MaximumQuoteStrategy;
 import com.bujalance.betting.strategy.MinimumQuoteStrategy;
@@ -17,13 +18,13 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		double betPerMatch = 2;
-		IStrategy minimumQuoteStrategy = new MinimumQuoteStrategy(betPerMatch);
-		MaximumQuoteStrategy maximumQuoteStrategy = new MaximumQuoteStrategy(betPerMatch);
+		Gambler minimumQuoteGambler = new Gambler(new MinimumQuoteStrategy(), betPerMatch);
+		Gambler maximumQuoteGambler = new Gambler(new MaximumQuoteStrategy(), betPerMatch);
 
 		Bookmaker bookmaker = Bookmaker.WILLIAM_HILL;
 		fLogger.info("Start betting € {} per match on {}", betPerMatch, bookmaker.name());
-		fLogger.info("Minimum quote strategy: € " + minimumQuoteStrategy.betOnEvents(new Wallet(), new BettingEventProvider(bookmaker)));
-		fLogger.info("Maximum quote strategy: € " + maximumQuoteStrategy.betOnEvents(new Wallet(), new BettingEventProvider(bookmaker)));
+		fLogger.info("Minimum quote strategy: € " + minimumQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
+		fLogger.info("Maximum quote strategy: € " + maximumQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
 		fLogger.info("End");
 	}
 
