@@ -13,20 +13,20 @@ public enum Result {
 
 	static {
 		for (Result result : EnumSet.allOf(Result.class))
-			fLookup.put(result.getValue(), result);
+			fLookup.put(result.getHeader(), result);
 	}
 
-	private final String fValue;
+	private final String fHeader;
 
-	Result(final String pValue) {
-		fValue = pValue;
+	Result(final String pHeader) {
+		fHeader = pHeader;
 	}
 
-	private String getValue() {
-		return fValue;
+	public String getHeader() {
+		return fHeader;
 	}
 
-	public static Result get(final String pValue) {
-		return fLookup.get(pValue);
+	public static Result get(final String pHeader) {
+		return fLookup.get(pHeader);
 	}
 }

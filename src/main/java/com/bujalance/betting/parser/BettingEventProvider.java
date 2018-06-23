@@ -1,6 +1,7 @@
 package com.bujalance.betting.parser;
 
 import com.bujalance.betting.model.BettingEvent;
+import com.bujalance.betting.model.Bookmaker;
 import com.bujalance.betting.model.Odd;
 import com.bujalance.betting.model.Result;
 import org.apache.commons.csv.CSVFormat;
@@ -17,15 +18,17 @@ public class BettingEventProvider implements Iterable<BettingEvent> {
 	private final static String DEFAULT_FILENAME = "LaLiga_17-18.csv";
 
 	private final CSVParser fParser;
+	private final Bookmaker fBookmaker;
 
-	public BettingEventProvider() throws IOException {
-		this(DEFAULT_FILENAME);
+	public BettingEventProvider(final Bookmaker pBookmaker) throws IOException {
+		this(DEFAULT_FILENAME, pBookmaker);
 	}
 
-	public BettingEventProvider(final String pFilename) throws IOException {
+	public BettingEventProvider(final String pFilename, final Bookmaker pBookmaker) throws IOException {
 		InputStream is = getClass().getClassLoader().getResourceAsStream(pFilename);
 		Reader reader = new InputStreamReader(is);
 		fParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader);
+		fBookmaker = pBookmaker;
 	}
 
 	@Override
@@ -58,11 +61,11 @@ public class BettingEventProvider implements Iterable<BettingEvent> {
 		private Set<Odd> parseOdds(final CSVRecord pRecord) {
 			Set<Odd> odds = new HashSet<>();
 			// Home winner
-			odds.add(new Odd(Result.HOME, Double.parseDouble(pRecord.get("B365H"))));
+			odds.add(new Odd(Result.HOME, Double.parseDouble(pRecord.get(fBookmaker.getHomeHeader()))));
 			// Draw
-			odds.add(new Odd(Result.DRAW, Double.parseDouble(pRecord.get("B365D"))));
+			odds.add(new Odd(Result.DRAW, Double.parseDouble(pRecord.get(fBookmaker.getDrawHeader()))));
 			// Away winner
-			odds.add(new Odd(Result.AWAY, Double.parseDouble(pRecord.get("B365A"))));
+			odds.add(new Odd(Result.AWAY, Double.parseDouble(pRecord.get(fBookmaker.getAwayHeader()))));
 			return odds;
 		}
 	}

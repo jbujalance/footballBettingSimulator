@@ -1,5 +1,6 @@
 package com.bujalance.betting;
 
+import com.bujalance.betting.model.Bookmaker;
 import com.bujalance.betting.model.Wallet;
 import com.bujalance.betting.parser.BettingEventProvider;
 import com.bujalance.betting.strategy.IStrategy;
@@ -19,9 +20,10 @@ public class Main {
 		IStrategy minimumQuoteStrategy = new MinimumQuoteStrategy(betPerMatch);
 		MaximumQuoteStrategy maximumQuoteStrategy = new MaximumQuoteStrategy(betPerMatch);
 
-		fLogger.info("Start betting € {} per match", betPerMatch);
-		fLogger.info("Minimum quote strategy: € " + minimumQuoteStrategy.betOnEvents(new Wallet(), new BettingEventProvider()));
-		fLogger.info("Maximum quote strategy: € " + maximumQuoteStrategy.betOnEvents(new Wallet(), new BettingEventProvider()));
+		Bookmaker bookmaker = Bookmaker.WILLIAM_HILL;
+		fLogger.info("Start betting € {} per match on {}", betPerMatch, bookmaker.name());
+		fLogger.info("Minimum quote strategy: € " + minimumQuoteStrategy.betOnEvents(new Wallet(), new BettingEventProvider(bookmaker)));
+		fLogger.info("Maximum quote strategy: € " + maximumQuoteStrategy.betOnEvents(new Wallet(), new BettingEventProvider(bookmaker)));
 		fLogger.info("End");
 	}
 
