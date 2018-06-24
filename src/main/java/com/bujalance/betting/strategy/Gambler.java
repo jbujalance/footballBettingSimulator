@@ -31,7 +31,7 @@ public class Gambler {
 		}
 
 		double finalFunds = fWallet.getFunds();
-		fLogger.info("Final funds following strategy " + fStrategy + ": € " + finalFunds);
+		fLogger.info("Final funds on strategy " + fStrategy + ": " + finalFunds);
 		return finalFunds;
 	}
 

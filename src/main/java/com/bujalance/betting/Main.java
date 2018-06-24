@@ -26,10 +26,11 @@ public class Main {
 				new LesserMinimumQuoteStrategy(baseQuantity, 1.3)
 		));
 
-		Bookmaker bookmaker = Bookmaker.WILLIAM_HILL;
+		String fileName = "data/spain/LaLiga_16-17.csv";
+		Bookmaker bookmaker = Bookmaker.BET_365;
 		fLogger.info("Start betting on {}", bookmaker.name());
 		for (IStrategy strategy : strategies) {
-			new Gambler(strategy).betOnEvents(new BettingEventProvider(bookmaker));
+			new Gambler(strategy).betOnEvents(new BettingEventProvider(fileName, bookmaker));
 		}
 		fLogger.info("End");
 	}
