@@ -26,13 +26,26 @@ public class Main {
 				new LesserMinimumQuoteStrategy(baseQuantity, 1.3)
 		));
 
-		String fileName = "data/spain/LaLiga_16-17.csv";
-		Bookmaker bookmaker = Bookmaker.BET_365;
-		fLogger.info("Start betting on {}", bookmaker.name());
-		for (IStrategy strategy : strategies) {
-			new Gambler(strategy).betOnEvents(new BettingEventProvider(fileName, bookmaker));
+		Set<String> files = new HashSet<>(Arrays.asList(
+				"spain/LaLiga_16-17.csv",
+				"spain/LaLiga_17-18.csv",
+				"spain/LaLiga_15-16.csv",
+				"france/Ligue1_17-18.csv",
+				"france/Ligue1_16-17.csv"
+		));
+
+		for (String file : files) {
+			fLogger.info("Start of leage {}:", file);
+			for (Bookmaker bookmaker : Bookmaker.values()) {
+				fLogger.info("Start betting on {}", bookmaker);
+				for (IStrategy strategy : strategies) {
+					new Gambler(strategy).betOnEvents(new BettingEventProvider(file, bookmaker));
+				}
+				fLogger.info("End of betting on {}", bookmaker);
+			}
+			fLogger.info("End of league {}", file);
 		}
-		fLogger.info("End");
+
 	}
 
 }

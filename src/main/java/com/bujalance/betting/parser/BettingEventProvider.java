@@ -18,7 +18,8 @@ import java.util.Set;
 
 public class BettingEventProvider implements Iterable<BettingEvent> {
 
-	private final static String DEFAULT_FILENAME = "data/spain/LaLiga_17-18.csv";
+	private final static String RELATIVE_PATH = "data/";
+	private final static String DEFAULT_FILENAME = RELATIVE_PATH + "spain/LaLiga_17-18.csv";
 
 	private final CSVParser fParser;
 	private final Bookmaker fBookmaker;
@@ -28,7 +29,7 @@ public class BettingEventProvider implements Iterable<BettingEvent> {
 	}
 
 	public BettingEventProvider(final String pFilename, final Bookmaker pBookmaker) throws IOException {
-		InputStream is = getClass().getClassLoader().getResourceAsStream(pFilename);
+		InputStream is = getClass().getClassLoader().getResourceAsStream(RELATIVE_PATH + pFilename);
 		Reader reader = new InputStreamReader(is);
 		fParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader);
 		fBookmaker = pBookmaker;
