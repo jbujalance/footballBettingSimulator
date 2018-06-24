@@ -18,4 +18,30 @@ public class BettingEvent {
 	public Result getResult() {
 		return fResult;
 	}
+
+	public Odd getMinimumQuoteOdd() {
+		double minQuote = Double.MAX_VALUE;
+		Odd minQuoteOdd = null;
+		for (Odd odd : fOdds) {
+			double oddQuote = odd.getQuote();
+			if (oddQuote < minQuote) {
+				minQuote = oddQuote;
+				minQuoteOdd = odd;
+			}
+		}
+		return minQuoteOdd;
+	}
+
+	public Odd getMaximumQuoteOdd() {
+		double maxQuote = -1;
+		Odd maxQuoteOdd = null;
+		for (Odd odd : fOdds) {
+			double oddQuote = odd.getQuote();
+			if (oddQuote > maxQuote) {
+				maxQuote = oddQuote;
+				maxQuoteOdd = odd;
+			}
+		}
+		return maxQuoteOdd;
+	}
 }

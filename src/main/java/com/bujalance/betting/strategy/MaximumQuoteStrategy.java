@@ -12,16 +12,7 @@ public class MaximumQuoteStrategy extends AbstractStrategy {
 
 	@Override
 	public Odd getChosenOdd(final BettingEvent pEvent) {
-		double maxQuote = -1;
-		Odd maxQuoteOdd = null;
-		for (Odd odd : pEvent.getOdds()) {
-			double oddQuote = odd.getQuote();
-			if (oddQuote > maxQuote) {
-				maxQuote = oddQuote;
-				maxQuoteOdd = odd;
-			}
-		}
-		return maxQuoteOdd;
+		return pEvent.getMaximumQuoteOdd();
 	}
 
 	@Override
