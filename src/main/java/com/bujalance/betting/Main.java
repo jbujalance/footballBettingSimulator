@@ -22,7 +22,8 @@ public class Main {
 				new MaximumQuoteStrategy(baseQuantity),
 				new MiddleQuoteStrategy(baseQuantity),
 				new ProportionalMinToMaxQuoteStrategy(baseQuantity),
-				new ProportionalMinToMiddleStrategy(baseQuantity)
+				new ProportionalMinToMiddleStrategy(baseQuantity),
+				new LesserMinimumQuoteStrategy(baseQuantity, 1.3)
 		));
 
 		Bookmaker bookmaker = Bookmaker.WILLIAM_HILL;

@@ -18,6 +18,6 @@ public abstract class AbstractStrategy implements IStrategy {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[baseQuantity=" + fBaseQuantity + " €]";
+		return getClass().getSimpleName() + "[baseQuantity=" + fBaseQuantity + "]";
 	}
 }
