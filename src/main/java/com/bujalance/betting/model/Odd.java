@@ -2,8 +2,8 @@ package com.bujalance.betting.model;
 
 public class Odd {
 
-	private Result fResult;
-	private double fQuote;
+	private final Result fResult;
+	private final double fQuote;
 
 	public Odd(final Result pResult, final double pQuote) {
 		fResult = pResult;

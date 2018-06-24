@@ -18,8 +18,8 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		double betPerMatch = 2;
-		Gambler minimumQuoteGambler = new Gambler(new MinimumQuoteStrategy(), betPerMatch);
-		Gambler maximumQuoteGambler = new Gambler(new MaximumQuoteStrategy(), betPerMatch);
+		Gambler minimumQuoteGambler = new Gambler(new MinimumQuoteStrategy(betPerMatch));
+		Gambler maximumQuoteGambler = new Gambler(new MaximumQuoteStrategy(betPerMatch));
 
 		Bookmaker bookmaker = Bookmaker.WILLIAM_HILL;
 		fLogger.info("Start betting € {} per match on {}", betPerMatch, bookmaker.name());

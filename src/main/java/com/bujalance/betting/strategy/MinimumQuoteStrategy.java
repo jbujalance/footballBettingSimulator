@@ -3,7 +3,11 @@ package com.bujalance.betting.strategy;
 import com.bujalance.betting.model.BettingEvent;
 import com.bujalance.betting.model.Odd;
 
-public class MinimumQuoteStrategy implements IStrategy {
+public class MinimumQuoteStrategy extends AbstractStrategy {
+
+	public MinimumQuoteStrategy(final double pBaseQuantity) {
+		super(pBaseQuantity);
+	}
 
 	@Override
 	public Odd getChosenOdd(final BettingEvent pEvent) {
@@ -17,6 +21,11 @@ public class MinimumQuoteStrategy implements IStrategy {
 			}
 		}
 		return minQuoteOdd;
+	}
+
+	@Override
+	public double getQuantity(final BettingEvent pEvent) {
+		return fBaseQuantity;
 	}
 
 }

@@ -11,32 +11,22 @@ public class Gambler {
 
 	private final IStrategy fStrategy;
 	private final Wallet fWallet;
-	/** The quantity to bet on each event. */
-	private final double fQuantityToBet;
 
-	public Gambler(final IStrategy pStrategy, final double pQuantityToBet) {
+	public Gambler(final IStrategy pStrategy) {
+		this(pStrategy, new Wallet());
+	}
+
+	public Gambler(final IStrategy pStrategy, final Wallet pWallet) {
 		fStrategy = pStrategy;
-		fWallet = new Wallet();
-		fQuantityToBet = pQuantityToBet;
+		fWallet = pWallet;
 	}
 
 	public double betOnEvents(final BettingEventProvider pProvider) {
 		Iterator<BettingEvent> events = pProvider.iterator();
 		while (events.hasNext()) {
-			betOnEvent(events.next(), fWallet);
+			fStrategy.getBetProposition(events.next()).execute(fWallet);
 		}
 		return fWallet.getFunds();
-	}
-
-	private void betOnEvent(final BettingEvent pEvent, final Wallet pWallet) {
-		Odd chosenOdd = fStrategy.getChosenOdd(pEvent);
-		if (pEvent.getResult().equals(chosenOdd.getResult())) {
-			// Winning bet
-			pWallet.add(chosenOdd.getQuote() * pWallet.get(fQuantityToBet));
-		} else {
-			// Loosing bet
-			pWallet.remove(fQuantityToBet);
-		}
 	}
 
 }
