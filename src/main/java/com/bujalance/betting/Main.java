@@ -18,13 +18,15 @@ public class Main {
 		Gambler maximumQuoteGambler = new Gambler(new MaximumQuoteStrategy(baseQuantity));
 		Gambler middleQuoteGambler = new Gambler(new MiddleQuoteStrategy(baseQuantity));
 		Gambler proportionalMinToMaxGambler = new Gambler(new ProportionalMinToMaxQuoteStrategy(baseQuantity));
+		Gambler proportionalMinToMiddleGambler = new Gambler(new ProportionalMinToMiddleStrategy(baseQuantity));
 
-		Bookmaker bookmaker = Bookmaker.WILLIAM_HILL;
+		Bookmaker bookmaker = Bookmaker.BET_365;
 		fLogger.info("Start betting € {} as base quantity on {}", baseQuantity, bookmaker.name());
 		fLogger.info("Minimum quote strategy: € " + minimumQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
 		fLogger.info("Maximum quote strategy: € " + maximumQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
 		fLogger.info("Middle quote strategy: € " + middleQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
 		fLogger.info("Proportional min to max quote strategy: € " + proportionalMinToMaxGambler.betOnEvents(new BettingEventProvider(bookmaker)));
+		fLogger.info("Proportional min to middle quote strategy: € " + proportionalMinToMiddleGambler.betOnEvents(new BettingEventProvider(bookmaker)));
 		fLogger.info("End");
 	}
 

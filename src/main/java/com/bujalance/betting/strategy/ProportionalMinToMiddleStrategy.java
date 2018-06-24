@@ -5,12 +5,12 @@ import com.bujalance.betting.model.Odd;
 
 /**
  * We bet on the minimum quote odd with a variable quantity.
- * The quantity to bet is given by the formula: {@code quantity = baseQuantity * maxQuote / minQuote}.
+ * The quantity to bet is given by the formula: {@code quantity = baseQuantity * middleQuote / minQuote}.
  * Thus, the bigger gap between odds, the bigger quantity is bet, reducing the loses.
  */
-public class ProportionalMinToMaxQuoteStrategy extends AbstractStrategy {
+public class ProportionalMinToMiddleStrategy extends AbstractStrategy {
 
-	public ProportionalMinToMaxQuoteStrategy(final double pBaseQuantity) {
+	public ProportionalMinToMiddleStrategy(final double pBaseQuantity) {
 		super(pBaseQuantity);
 	}
 
@@ -21,6 +21,6 @@ public class ProportionalMinToMaxQuoteStrategy extends AbstractStrategy {
 
 	@Override
 	public double getQuantity(final BettingEvent pEvent) {
-		return fBaseQuantity * pEvent.getMaximumQuoteOdd().getQuote() / pEvent.getMinimumQuoteOdd().getQuote();
+		return fBaseQuantity * pEvent.getMiddleQuoteOdd().getQuote() / pEvent.getMinimumQuoteOdd().getQuote();
 	}
 }
