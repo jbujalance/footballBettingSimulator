@@ -1,7 +1,6 @@
 package com.bujalance.betting.strategy;
 
 import com.bujalance.betting.model.BettingEvent;
-import com.bujalance.betting.model.ExecutableBet;
 import com.bujalance.betting.model.Odd;
 
 public class MaximumQuoteStrategy extends AbstractStrategy {

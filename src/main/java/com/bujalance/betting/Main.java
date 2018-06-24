@@ -1,9 +1,11 @@
 package com.bujalance.betting;
 
 import com.bujalance.betting.model.Bookmaker;
-import com.bujalance.betting.model.Wallet;
 import com.bujalance.betting.parser.BettingEventProvider;
-import com.bujalance.betting.strategy.*;
+import com.bujalance.betting.strategy.Gambler;
+import com.bujalance.betting.strategy.MaximumQuoteStrategy;
+import com.bujalance.betting.strategy.MiddleQuoteStrategy;
+import com.bujalance.betting.strategy.MinimumQuoteStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,7 +1,6 @@
 package com.bujalance.betting.strategy;
 
 import com.bujalance.betting.model.BettingEvent;
-import com.bujalance.betting.model.Odd;
 import com.bujalance.betting.model.Wallet;
 import com.bujalance.betting.parser.BettingEventProvider;
 
