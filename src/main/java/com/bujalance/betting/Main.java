@@ -7,6 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
 
@@ -14,19 +17,19 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		double baseQuantity = 2;
-		Gambler minimumQuoteGambler = new Gambler(new MinimumQuoteStrategy(baseQuantity));
-		Gambler maximumQuoteGambler = new Gambler(new MaximumQuoteStrategy(baseQuantity));
-		Gambler middleQuoteGambler = new Gambler(new MiddleQuoteStrategy(baseQuantity));
-		Gambler proportionalMinToMaxGambler = new Gambler(new ProportionalMinToMaxQuoteStrategy(baseQuantity));
-		Gambler proportionalMinToMiddleGambler = new Gambler(new ProportionalMinToMiddleStrategy(baseQuantity));
+		Set<IStrategy> strategies = new HashSet<>(Arrays.asList(
+				new MinimumQuoteStrategy(baseQuantity),
+				new MaximumQuoteStrategy(baseQuantity),
+				new MiddleQuoteStrategy(baseQuantity),
+				new ProportionalMinToMaxQuoteStrategy(baseQuantity),
+				new ProportionalMinToMiddleStrategy(baseQuantity)
+		));
 
-		Bookmaker bookmaker = Bookmaker.BET_365;
-		fLogger.info("Start betting € {} as base quantity on {}", baseQuantity, bookmaker.name());
-		fLogger.info("Minimum quote strategy: € " + minimumQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
-		fLogger.info("Maximum quote strategy: € " + maximumQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
-		fLogger.info("Middle quote strategy: € " + middleQuoteGambler.betOnEvents(new BettingEventProvider(bookmaker)));
-		fLogger.info("Proportional min to max quote strategy: € " + proportionalMinToMaxGambler.betOnEvents(new BettingEventProvider(bookmaker)));
-		fLogger.info("Proportional min to middle quote strategy: € " + proportionalMinToMiddleGambler.betOnEvents(new BettingEventProvider(bookmaker)));
+		Bookmaker bookmaker = Bookmaker.WILLIAM_HILL;
+		fLogger.info("Start betting on {}", bookmaker.name());
+		for (IStrategy strategy : strategies) {
+			new Gambler(strategy).betOnEvents(new BettingEventProvider(bookmaker));
+		}
 		fLogger.info("End");
 	}
 

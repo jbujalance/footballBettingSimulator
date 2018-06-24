@@ -1,6 +1,6 @@
 package com.bujalance.betting.model;
 
-public class Odd {
+public class Odd implements Comparable<Odd> {
 
 	private final Result fResult;
 	private final double fQuote;
@@ -18,4 +18,8 @@ public class Odd {
 		return fQuote;
 	}
 
+	@Override
+	public int compareTo(final Odd pOther) {
+		return fResult.compareTo(pOther.getResult());
+	}
 }

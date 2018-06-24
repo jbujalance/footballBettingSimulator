@@ -15,4 +15,9 @@ public abstract class AbstractStrategy implements IStrategy {
 	public ExecutableBet getBetProposition(final BettingEvent pEvent) {
 		return new ExecutableBet(getChosenOdd(pEvent), pEvent.getResult(), getQuantity(pEvent));
 	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[baseQuantity=" + fBaseQuantity + " €]";
+	}
 }

@@ -29,4 +29,5 @@ public enum Result {
 	public static Result get(final String pHeader) {
 		return fLookup.get(pHeader);
 	}
+
 }

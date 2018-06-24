@@ -1,13 +1,15 @@
 package com.bujalance.betting.model;
 
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class BettingEvent {
-	private final Set<Odd> fOdds;
+	private final SortedSet<Odd> fOdds;
 	private final Result fResult;
 
 	public BettingEvent(final Set<Odd> pOdds, final Result pResult) {
-		fOdds = pOdds;
+		fOdds = new TreeSet<>(pOdds);
 		fResult = pResult;
 	}
 

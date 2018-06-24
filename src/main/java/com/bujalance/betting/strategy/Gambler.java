@@ -3,10 +3,14 @@ package com.bujalance.betting.strategy;
 import com.bujalance.betting.model.BettingEvent;
 import com.bujalance.betting.model.Wallet;
 import com.bujalance.betting.parser.BettingEventProvider;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Iterator;
 
 public class Gambler {
+
+	private final static Logger fLogger = LogManager.getLogger(Gambler.class);
 
 	private final IStrategy fStrategy;
 	private final Wallet fWallet;
@@ -25,7 +29,10 @@ public class Gambler {
 		while (events.hasNext()) {
 			fStrategy.getBetProposition(events.next()).execute(fWallet);
 		}
-		return fWallet.getFunds();
+
+		double finalFunds = fWallet.getFunds();
+		fLogger.info("Final funds following strategy " + fStrategy + ": € " + finalFunds);
+		return finalFunds;
 	}
 
 }
