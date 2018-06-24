@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class BettingEventProvider implements Iterable<BettingEvent> {
 
-	private final static String DEFAULT_FILENAME = "LaLiga_17-18.csv";
+	private final static String DEFAULT_FILENAME = "data/spain/LaLiga_17-18.csv";
 
 	private final CSVParser fParser;
 	private final Bookmaker fBookmaker;

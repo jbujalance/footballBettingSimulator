@@ -7,7 +7,7 @@ public abstract class AbstractStrategy implements IStrategy {
 
 	final double fBaseQuantity;
 
-	public AbstractStrategy(final double pBaseQuantity) {
+	AbstractStrategy(final double pBaseQuantity) {
 		fBaseQuantity = pBaseQuantity;
 	}
 

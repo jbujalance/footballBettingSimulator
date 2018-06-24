@@ -44,4 +44,16 @@ public class BettingEvent {
 		}
 		return maxQuoteOdd;
 	}
+
+	public Odd getMiddleQuoteOdd() {
+		Odd minOdd = getMinimumQuoteOdd();
+		Odd maxOdd = getMaximumQuoteOdd();
+		Odd middleQuoteOdd = null;
+		for (Odd odd : fOdds) {
+			if (!odd.equals(minOdd) && !odd.equals(maxOdd)) {
+				middleQuoteOdd = odd;
+			}
+		}
+		return middleQuoteOdd;
+	}
 }
